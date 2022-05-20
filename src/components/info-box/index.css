@@ -1,0 +1,50 @@
+.info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+.info-box:hover {
+    filter: brightness(1.2);
+}
+
+.info-box .state-and-info {
+    display: flex;
+}
+.info-box .state-and-info > .state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    margin-right: 10px;
+}
+.info-box .state-and-info .state .color {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.info-box .state-and-info .info {
+    flex: 1;
+}
+.info-box .row {
+    display: flex;
+    margin-bottom: 5px;
+}
+.info-box .group {
+    width: 50%;
+}
+.info-box .group .key {
+    margin-right: 10px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 11px;
+}
+.info-box .group .value {
+    color: #c4c4c4;
+    font-size: 9px;
+}
+.info-box .border-line {
+    margin-top: 10px;
+}

@@ -1,0 +1,38 @@
+.terminal-box {
+    display: flex;
+    height: 120px;
+    padding: 15px 20px;
+    cursor: pointer;
+    background: url('../../../public/terminal-box.svg');
+    background-size: cover;
+    color: #fff;
+}
+.terminal-box:hover {
+    filter: brightness(1.2);
+}
+.terminal-box .state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+.terminal-box .state .color {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.terminal-box .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+}
+.terminal-box .group .key {
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 11px;
+}
+.terminal-box .group .value {
+    font-size: 9px;
+    color: #c4c4c4;
+}

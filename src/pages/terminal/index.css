@@ -1,0 +1,266 @@
+.terminal {
+    padding-bottom: 25px;
+    background: url('../../../public/back.png');
+}
+.terminal .body {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: calc(100vh - 90px);
+    margin: 0 45px;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #727083;
+    border-radius: 12px;
+}
+
+/* info-detail */
+.terminal .info-detail {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 100%;
+    padding: 0 20px 10px;
+    z-index: 999;
+}
+.terminal .info-detail .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+.terminal .info-detail .detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-bottom: 30px;
+    padding: 10px 10px 5px;
+    background: rgba(196, 196, 196, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -0.5px 1px 0.5px rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(9px);
+    border-radius: 16px;
+    color: #fff;
+    overflow-y: auto;
+}
+.terminal .info-detail .detail .detail-row {
+    display: flex;
+}
+.terminal .info-detail .detail .detail-row:first-child {
+    margin: 10px 0 40px 0;
+}
+.terminal .info-detail .detail .detail-row .icon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 15px 0 10px;
+}
+.terminal .info-detail .detail .detail-row .icon .color,
+.terminal .info-detail .detail .detail-row .icon .clock {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.terminal .info-detail .detail .group {
+    margin-bottom: 15px;
+}
+.terminal .info-detail .detail .group .key {
+    margin-right: 10px;
+    font-weight: 600;
+    font-size: 11px;
+}
+.terminal .info-detail .detail .group .value {
+    font-size: 9px;
+    color: #c4c4c4;
+}
+.terminal .info-detail .get-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: rgba(196, 196, 196, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -0.5px 1px 0.5px rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(9px);
+    border-radius: 16px;
+    cursor: pointer;
+}
+.terminal .info-detail .get-info {
+    font-size: 14px;
+    color: #fff;
+}
+.terminal .info-detail .get-info img {
+    height: 35px;
+    margin-top: 15px;
+}
+.terminal .info-detail .get-info img:hover {
+    filter: brightness(1.5);
+}
+
+/* pic-and-chart */
+.terminal .pic-and-chart {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    z-index: 999;
+}
+.terminal .pic-and-chart .pic {
+    position: relative;
+    width: calc(100vw - 560px);
+    height: 64.5%;
+    margin-bottom: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all linear 0.1s;
+}
+.terminal .pic-and-chart .chart {
+    flex: 1;
+}
+.terminal .pic-and-chart .chart > div {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* video */
+.terminal .pic-and-chart .pic .video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0;
+    z-index: 999;
+    background-image: url('../../../public/back.png');
+    background-size: cover;
+    object-fit: cover;
+    transition: all linear 0.3s;
+}
+.terminal .pic-and-chart .pic .tips {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999;
+    color: #fff;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* pic */
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    background-size: cover;
+    background-position: center;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.mySwiper2 {
+    height: 100%;
+    width: 100%;
+}
+.mySwiper {
+    position: absolute !important;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    padding: 10px !important;
+    box-sizing: border-box;
+}
+.mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+}
+.mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+}
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* info-list */
+.terminal .info-list {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    height: 100%;
+    padding: 0 20px;
+    background-color: transparent;
+    z-index: 9999;
+}
+.terminal .info-list .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+.terminal .info-list .list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 450px) {
+    .terminal .body {
+        width: 100vw;
+        flex-direction: column;
+    }
+    .terminal .info-detail {
+        width: 100%;
+    }
+    .terminal .info-detail .detail {
+        margin: 0;
+    }
+    .terminal .info-detail .title,
+    .terminal .info-detail .get-info {
+        display: none;
+    }
+    .terminal .pic-and-chart {
+        display: none;
+    }
+    .terminal .info-list {
+        flex: 1;
+        width: 100%;
+        padding-top: 0;
+        overflow-y: auto;
+    }
+    .terminal .info-list .title {
+        display: none;
+    }
+}

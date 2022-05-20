@@ -1,0 +1,97 @@
+.header {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    padding: 0 45px;
+    color: #fff;
+}
+
+/* logo */
+.header .logo {
+    width: 160px;
+    height: 20px;
+    margin-right: 80px;
+    font-size: 24px;
+}
+
+/* space */
+.header .space {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+}
+
+/* user */
+.header .user {
+    position: relative;
+    display: flex;
+    width: 240px;
+    padding-left: 10px;
+}
+.header .user .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-image: url('../../../public/yui1.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+.header .user .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60px;
+    height: 40px;
+    color: #adb6d7;
+}
+.header .user .user-info .name {
+    font-size: 12px;
+}
+.header .user .user-info .role {
+    font-size: 9px;
+}
+.header .user .func-list {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    border-radius: 5px;
+    color: #000;
+    background-color: #fff;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 99999;
+    visibility: hidden;
+    opacity: 0;
+    transition: all linears 0.5s;
+}
+.header .user .func-list > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.header .user .func-list > *:hover {
+    background-color: #0a0935;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 450px) {
+    .space-info {
+        display: none;
+    }
+}
