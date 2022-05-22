@@ -272,7 +272,7 @@ const Index = props => {
         }
     }
     function takeVideo(ip) {
-        ip = '127.0.0.1'
+        ip = '10.13.30.64'
         const video = document.querySelector('.pic .video')
         const tips = document.querySelector('.pic .tips')
         window.client && window.client.close()
@@ -281,13 +281,17 @@ const Index = props => {
             window.client.send('video')
             video.style.height = '100%'
             tips.style.display = 'block'
+            var interval = setInterval(() => {
+                window.client.send('')
+            }, 500)
             video.addEventListener('click', () => {
+                window.client.send('end')
                 window.client.close()
+                clearInterval(interval)
                 video.style.height = '0'
                 tips.style.display = 'none'
             })
         }
-
         window.client.onmessage = function (data) {
             setImg(`data:image/jpg;base64,${data.data}`)
         }
