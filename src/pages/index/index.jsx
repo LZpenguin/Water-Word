@@ -55,9 +55,10 @@ function Index(props) {
                         ></div>
                     </div>
                     <div className="list">
-                        {searchList.map(item => {
-                            return <TerminalBox key={item.tid} tid={item.tid} location={item.location} water_level={item.water_level} time={item.created_time} />
-                        })}
+                        {searchList &&
+                            searchList.map(item => {
+                                return <TerminalBox key={item.tid} tid={item.tid} location={item.location} water_level={item.water_level} time={item.created_time} />
+                            })}
                     </div>
                 </div>
                 <div className="map-and-clock">
@@ -81,13 +82,34 @@ function Index(props) {
         </div>
     )
     function getData() {
-        axios.post('terminal/all').then(res => {
-            setTerminalList(res.data.data)
-            setSearchList(res.data.data)
-        })
-        axios.post('terminal/find').then(res => {
-            setInfoList(res.data.data)
-        })
+        axios
+            .post(
+                'terminal/all',
+                {},
+                {
+                    headers: {
+                        'x-token': props.login
+                    }
+                }
+            )
+            .then(res => {
+                console.log(res)
+                setTerminalList(res.data.data)
+                setSearchList(res.data.data)
+            })
+        axios
+            .post(
+                'terminal/find',
+                {},
+                {
+                    headers: {
+                        'x-token': props.login
+                    }
+                }
+            )
+            .then(res => {
+                setInfoList(res.data.data)
+            })
     }
     function inputChange(e) {
         var value = e.target.value.toLowerCase()

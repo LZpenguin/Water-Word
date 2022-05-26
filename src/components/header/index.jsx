@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
 
 const Index = props => {
+    const [user, setUser] = useState({})
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user')))
+    })
     return (
         <div className="header">
             <img className="logo" src="logo.svg" alt="" />
@@ -9,7 +13,9 @@ const Index = props => {
                 <div className="space-info">智慧水文监测平台</div>
             </div>
             <div className="user">
-                <div
+                <img
+                    src={user && user.avatar}
+                    alt=""
                     className="avatar"
                     onMouseOver={() => {
                         show(true)
@@ -17,10 +23,10 @@ const Index = props => {
                     onMouseOut={() => {
                         show(false)
                     }}
-                ></div>
+                ></img>
                 <div className="user-info">
-                    <div className="name">ID24397</div>
-                    <div className="role">监测员</div>
+                    <div className="name">ID{user && user.ID}</div>
+                    <div className="role">监测员 {user && user.username}</div>
                 </div>
                 <div
                     className="func-list"
@@ -35,6 +41,8 @@ const Index = props => {
                         className="logout"
                         onClick={() => {
                             props.setLogin(false)
+                            localStorage.removeItem('token')
+                            localStorage.removeItem('user')
                         }}
                     >
                         登出

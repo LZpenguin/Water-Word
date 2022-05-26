@@ -39,7 +39,8 @@
     height: 40px;
     margin-right: 15px;
     border-radius: 50%;
-    background-image: url('../../../public/yui1.jpg');
+    background-color: #fff;
+    /* background-image: url('../../../public/yui1.jpg'); */
     background-size: cover;
     background-position: 50% 50%;
     cursor: pointer;
@@ -48,7 +49,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 60px;
+    width: 100px;
     height: 40px;
     color: #adb6d7;
 }

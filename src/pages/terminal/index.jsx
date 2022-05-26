@@ -182,6 +182,7 @@ const Index = props => {
                                 </div>
                             </div>
                         </div>
+                        <div className="clock_and_freq">编辑监测时间</div>
                     </div>
                     <div className="get-info">
                         <div>即时采样</div>
@@ -223,6 +224,10 @@ const Index = props => {
                             </div>
                         </div>
                         <img src={img} alt="" className="video" />
+                        <div className="loading">
+                            <div className="center"></div>
+                            <div className="cover"></div>
+                        </div>
                         <div className="tips">点击关闭视频</div>
                     </div>
                     <div className="chart" id="chart"></div>
@@ -252,13 +257,27 @@ const Index = props => {
         </div>
     )
     function getData(tid, time) {
-        axios.post(`terminal/find?tid=${tid}`).then(res => {
-            var data = res.data.data
-            if (data !== null && data !== undefined) {
-                setTerminalData(data)
-                setSelected(data.find(item => item.created_time === time))
-            }
-        })
+        let token = localStorage.getItem('token')
+        if (!token) {
+            setLogout(true)
+        }
+        axios
+            .post(
+                `terminal/find?tid=${tid}`,
+                {},
+                {
+                    headers: {
+                        'x-token': token
+                    }
+                }
+            )
+            .then(res => {
+                var data = res.data.data
+                if (data !== null && data !== undefined) {
+                    setTerminalData(data)
+                    setSelected(data.find(item => item.created_time === time))
+                }
+            })
     }
     function takePhoto(ip) {
         // ip = '127.0.0.1'
@@ -272,29 +291,44 @@ const Index = props => {
         }
     }
     function takeVideo(ip) {
-        ip = '10.13.30.64'
+        ip = 'localhost'
         const video = document.querySelector('.pic .video')
+        const loading = document.querySelector('.pic .loading')
         const tips = document.querySelector('.pic .tips')
-        window.client && window.client.close()
-        window.client = new WebSocket(`ws://${ip}:9001`)
-        window.client.onopen = function () {
-            window.client.send('video')
-            video.style.height = '100%'
-            tips.style.display = 'block'
-            var interval = setInterval(() => {
-                window.client.send('')
+        let client = new WebSocket(`ws://${ip}:9001`)
+        let interval
+        video.style.height = '100%'
+        tips.style.display = 'block'
+        loading.style.display = 'block'
+        client.onopen = function () {
+            client.send('video')
+            interval = setInterval(() => {
+                client.send('')
             }, 500)
-            video.addEventListener('click', () => {
-                window.client.send('end')
-                window.client.close()
-                clearInterval(interval)
-                video.style.height = '0'
-                tips.style.display = 'none'
-            })
         }
-        window.client.onmessage = function (data) {
-            setImg(`data:image/jpg;base64,${data.data}`)
+        client.onerror = function (err) {
+            video.click()
+            alert('终端视频开启失败')
         }
+        client.onmessage = function (data) {
+            loading.style.display = 'none'
+            setTimeout(() => {
+                setImg(`data:image/jpg;base64,${data.data}`)
+            }, 500)
+        }
+        video.addEventListener('click', () => {
+            clearInterval(interval)
+            video.style.height = '0'
+            tips.style.display = 'none'
+            loading.style.display = 'none'
+            if (client.OPEN || client.CONNECTING) {
+                client.send('end')
+                client.close()
+            }
+            setTimeout(() => {
+                setImg('')
+            }, 800)
+        })
     }
 }
 

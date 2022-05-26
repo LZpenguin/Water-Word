@@ -2,6 +2,8 @@ import { React, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import './index.css'
 
+import axios from '../../utils/axios'
+
 const Index = props => {
     const [account, setAccount] = useState('')
     const [password, setPassword] = useState('')
@@ -14,7 +16,7 @@ const Index = props => {
                 <div className="welcome">欢迎回来!</div>
                 <div className="tips">输入账户密码登录</div>
                 <div className="ap-box">
-                    <div className="key">账户</div>
+                    <div className="key">账号</div>
                     <input type="text" placeholder="请输入账号" value={account} onChange={accountChange} className="account value" />
                     <div className="other"></div>
                 </div>
@@ -44,19 +46,32 @@ const Index = props => {
     }
     function login() {
         var tips = document.querySelector('.login .tips')
-        if (account === 'admin' && password === 'admin') {
-            props.setLogin(true)
-        } else if (account === '') {
+        if (account === '') {
             tips.innerHTML = '请输入账号'
             tips.style.color = 'red'
         } else if (password === '') {
             tips.innerHTML = '请输入密码'
             tips.style.color = 'red'
-        } else {
-            tips.innerHTML = '账号或密码错误'
-            tips.style.color = 'red'
-            setPassword('')
         }
+        axios
+            .post('/base/login', {
+                username: account,
+                password: password
+            })
+            .then(res => {
+                let data = res.data
+                let user = data.data.user
+                console.log(res)
+                if (data.code == 200) {
+                    props.setLogin(data.data.token)
+                    localStorage.setItem('token', data.data.token)
+                    localStorage.setItem('user', JSON.stringify(user))
+                } else {
+                    tips.innerHTML = '账号或密码错误'
+                    tips.style.color = 'red'
+                    setPassword('')
+                }
+            })
     }
     function loginKeyUp(e) {
         if (e.keyCode === 13) {

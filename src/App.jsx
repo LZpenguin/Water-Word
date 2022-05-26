@@ -5,7 +5,7 @@ import Terminal from './pages/terminal'
 import Login from './pages/login'
 
 const App = () => {
-    const [login, setLogin] = useState(false)
+    const [login, setLogin] = useState('')
     return (
         <BrowserRouter>
             <Routes>
