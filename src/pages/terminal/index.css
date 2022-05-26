@@ -88,6 +88,7 @@
     background-color: #25223c;
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
 }
 .terminal .info-detail .detail .clock_and_freq:hover {
     filter: brightness(1.2);
@@ -300,6 +301,139 @@
 .terminal .info-list .list {
     flex: 1;
     overflow-y: auto;
+}
+
+/* setting */
+.terminal .setting {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: calc(50% - 250px);
+    top: 80px;
+    width: 500px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid #727083;
+    border-radius: 12px;
+    z-index: 99999;
+    visibility: hidden;
+}
+.terminal .setting .title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+.terminal .setting .clock {
+    margin-bottom: 20px;
+}
+.terminal .setting .clock .list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.terminal .setting .clock .list .item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    padding: 0 20px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 14px;
+    background-color: #141256;
+    border-radius: 15px;
+}
+.terminal .setting .clock .list .input input {
+    width: 40px;
+    text-align: center;
+    color: #fff;
+}
+.terminal .setting .clock .list .item > img {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.terminal .setting .clock .list .adder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #141256;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.terminal .setting .clock .list .adder:hover {
+    filter: brightness(1.5);
+}
+.terminal .setting .freq {
+    margin-bottom: 20px;
+}
+.terminal .setting .freq .group {
+    display: flex;
+    height: 30px;
+    font-size: 14px;
+}
+.terminal .setting .freq .group .sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #141256;
+    border-right: 1px solid #fff;
+    cursor: pointer;
+}
+.terminal .setting .freq .group .value {
+    text-align: center;
+    width: 60px;
+    height: 30px;
+    color: #fff;
+    background-color: #141256;
+}
+.terminal .setting .freq .group .add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background-color: #141256;
+    border-left: 1px solid #fff;
+    cursor: pointer;
+}
+.terminal .setting .freq .group .sub:hover,
+.terminal .setting .freq .group .add:hover {
+    filter: brightness(1.5);
+}
+.terminal .setting .space {
+    height: 50px;
+}
+.terminal .setting .func {
+    display: flex;
+    justify-content: flex-end;
+}
+.terminal .setting .func > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #141256;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.terminal .setting .func > *:hover {
+    filter: brightness(1.5);
 }
 
 /* 移动端适配 */

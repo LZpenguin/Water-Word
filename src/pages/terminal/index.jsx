@@ -17,6 +17,10 @@ const Index = props => {
     const [terminalData, setTerminalData] = useState([])
     const [selected, setSelected] = useState({})
     const [img, setImg] = useState('')
+    const [clock, setClock] = useState(['6:00', '12:30', '16:40', '23:00'])
+    const [adding, setAdding] = useState(false)
+    const [input1, setInput1] = useState('')
+    const [input2, setInput2] = useState('0')
     useEffect(() => {
         //get query
         var querys = window.location.href.split('?')[1].split('&')
@@ -182,7 +186,9 @@ const Index = props => {
                                 </div>
                             </div>
                         </div>
-                        <div className="clock_and_freq">编辑监测时间</div>
+                        <div className="clock_and_freq" onClick={() => showSettingBox(true)}>
+                            编辑监测时间
+                        </div>
                     </div>
                     <div className="get-info">
                         <div>即时采样</div>
@@ -251,6 +257,49 @@ const Index = props => {
                                     />
                                 )
                             })}
+                    </div>
+                </div>
+                <div className="setting">
+                    <div className="clock">
+                        <div className="title">每日取样时间</div>
+                        <div className="list">
+                            {clock.map(item => {
+                                return (
+                                    <div key={item} className="item">
+                                        {item}
+                                        <img src="x.svg" alt="" onClick={() => clockSub(item)} />
+                                    </div>
+                                )
+                            })}
+                            {adding && (
+                                <div className="item input">
+                                    <input type="text" autoFocus value={input1} onChange={inputChange1} onBlur={checkInput} />
+                                    <img src="x.svg" alt="" />
+                                </div>
+                            )}
+                            <div className="adder" onClick={() => setAdding(true)}>
+                                +
+                            </div>
+                        </div>
+                    </div>
+                    <div className="freq">
+                        <div className="title">每日抽检频次</div>
+                        <div className="group">
+                            <div className="sub" onClick={() => parseInt(input2) > 0 && setInput2(parseInt(input2) - 1)}>
+                                -
+                            </div>
+                            <input className="value" value={input2} onChange={inputChange2} />
+                            <div className="add" onClick={() => parseInt(input2) < 100 && setInput2(parseInt(input2) + 1)}>
+                                +
+                            </div>
+                        </div>
+                    </div>
+                    <div className="space"></div>
+                    <div className="func">
+                        <div className="confirm">确认</div>
+                        <div className="cancel" onClick={() => showSettingBox(false)}>
+                            取消
+                        </div>
                     </div>
                 </div>
             </div>
@@ -329,6 +378,35 @@ const Index = props => {
                 setImg('')
             }, 800)
         })
+    }
+    function showSettingBox(bool) {
+        let settingBox = document.querySelector('.terminal .setting')
+        settingBox.style.visibility = bool ? 'visible' : 'hidden'
+    }
+    function inputChange1(e) {
+        setInput1(e.target.value)
+    }
+    function inputChange2(e) {
+        if (e.target.value > 100) {
+            alert('抽检上限为 100次/天')
+            return
+        }
+        setInput2(e.target.value)
+    }
+    function clockSub(target) {
+        let newClock = clock.filter(item => item !== target)
+        setClock(newClock)
+    }
+    function checkInput() {
+        let input = input1.replace('：', ':')
+        var reg = /^[\d]{1,2}:[\d]{2}$/
+        if (input && !clock.find(item => item === input) && reg.test(input)) {
+            let newClock = [...clock]
+            newClock.push(input)
+            setClock(newClock)
+        }
+        setInput1('')
+        setAdding(false)
     }
 }
 

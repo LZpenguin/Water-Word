@@ -14,7 +14,7 @@ const Index = props => {
             </div>
             <div className="user">
                 <img
-                    src={user && user.avatar}
+                    src={user && user.avatar === '无' ? 'avatar.svg' : user.avatar}
                     alt=""
                     className="avatar"
                     onMouseOver={() => {
