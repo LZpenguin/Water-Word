@@ -186,7 +186,13 @@ const Index = props => {
                                 </div>
                             </div>
                         </div>
-                        <div className="clock_and_freq" onClick={() => showSettingBox(true)}>
+                        <div
+                            className="clock_and_freq"
+                            onClick={() => {
+                                getConfig()
+                                showSettingBox(true)
+                            }}
+                        >
                             编辑监测时间
                         </div>
                     </div>
@@ -296,7 +302,15 @@ const Index = props => {
                     </div>
                     <div className="space"></div>
                     <div className="func">
-                        <div className="confirm">确认</div>
+                        <div
+                            className="confirm"
+                            onClick={() => {
+                                setConfig()
+                                showSettingBox(false)
+                            }}
+                        >
+                            确认
+                        </div>
                         <div className="cancel" onClick={() => showSettingBox(false)}>
                             取消
                         </div>
@@ -327,6 +341,30 @@ const Index = props => {
                     setSelected(data.find(item => item.created_time === time))
                 }
             })
+    }
+    function getConfig(ip) {
+        ip = 'localhost'
+        let client = new WebSocket(`ws://${ip}:9001`)
+        client.onopen = function () {
+            client.send('config')
+        }
+        client.onmessage = function (data) {
+            let clockFreq = data.data.split('&')
+            let clock = clockFreq[0].trim().split(' ')
+            let freq = clockFreq[1].trim()
+            setClock(clock)
+            setInput2(freq)
+            client.close()
+        }
+    }
+    function setConfig(ip) {
+        ip = 'localhost'
+        let client = new WebSocket(`ws://${ip}:9001`)
+        client.onopen = function () {
+            client.send('set')
+            client.send(clock.join(' ') + '&' + input2)
+            client.close()
+        }
     }
     function takePhoto(ip) {
         // ip = '127.0.0.1'
