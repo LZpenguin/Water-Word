@@ -17,7 +17,7 @@ const Index = props => {
     const [terminalData, setTerminalData] = useState([])
     const [selected, setSelected] = useState({})
     const [img, setImg] = useState('')
-    const [clock, setClock] = useState(['6:00', '12:30', '16:40', '23:00'])
+    const [clock, setClock] = useState([])
     const [adding, setAdding] = useState(false)
     const [input1, setInput1] = useState('')
     const [input2, setInput2] = useState('0')
@@ -189,7 +189,7 @@ const Index = props => {
                         <div
                             className="clock_and_freq"
                             onClick={() => {
-                                getConfig()
+                                getConfig(terminalData[0] && terminalData[0].ip)
                                 showSettingBox(true)
                             }}
                         >
@@ -305,7 +305,7 @@ const Index = props => {
                         <div
                             className="confirm"
                             onClick={() => {
-                                setConfig()
+                                setConfig(terminalData[0] && terminalData[0].ip)
                                 showSettingBox(false)
                             }}
                         >
@@ -343,12 +343,13 @@ const Index = props => {
             })
     }
     function getConfig(ip) {
-        ip = 'localhost'
+        // ip = '10.13.31.209'
         let client = new WebSocket(`ws://${ip}:9001`)
         client.onopen = function () {
             client.send('config')
         }
         client.onmessage = function (data) {
+            console.log(data)
             let clockFreq = data.data.split('&')
             let clock = clockFreq[0].trim().split(' ')
             let freq = clockFreq[1].trim()
@@ -358,16 +359,18 @@ const Index = props => {
         }
     }
     function setConfig(ip) {
-        ip = 'localhost'
+        // ip = '10.13.31.209'
         let client = new WebSocket(`ws://${ip}:9001`)
         client.onopen = function () {
-            client.send('set')
+            client.send('setConfig')
             client.send(clock.join(' ') + '&' + input2)
             client.close()
         }
+        client.onclose = function () {
+            getConfig(ip)
+        }
     }
     function takePhoto(ip) {
-        // ip = '127.0.0.1'
         const client = new WebSocket(`ws://${ip}:9001`)
         client.onopen = function () {
             client.send('photo')
@@ -378,7 +381,7 @@ const Index = props => {
         }
     }
     function takeVideo(ip) {
-        ip = 'localhost'
+        // ip = '10.13.31.209'
         const video = document.querySelector('.pic .video')
         const loading = document.querySelector('.pic .loading')
         const tips = document.querySelector('.pic .tips')
